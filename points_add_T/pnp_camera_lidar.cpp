@@ -132,7 +132,7 @@ int main()
 	CalibPara imgpara;
 	ReadCamPara(thermal_calib, imgpara);
 	Mat r, t;
-	// 输出世界坐标系到相机坐标系的变换
+	// 输出激光雷达坐标系到相机坐标系的变换
 	solvePnP(points_3D, points_2D, imgpara.cameraMatrix, imgpara.distCoeffs, r, t, false, CV_EPNP);
 	Mat R;
 	cv::Rodrigues(r, R);
@@ -140,11 +140,11 @@ int main()
 	cout << "t=" << endl << t << endl;
 
 	// 保存外参
-	/*cv::FileStorage fs(save_path, FileStorage::WRITE);
+	cv::FileStorage fs(save_path, FileStorage::WRITE);
 	fs << "R" << R;
 	fs << "t" << t;
+	fs.release();
 
-	fs.release();*/
 	system("pause");
 	return 0;
 }
